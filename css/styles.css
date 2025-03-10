@@ -1,0 +1,68 @@
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: 'Space Grotesk', sans-serif;
+}
+html, body {
+    height: 100vh;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    text-align: center;
+}
+.space-grotesk-title {
+    font-family: "Space Grotesk", sans-serif;
+    font-optical-sizing: auto;
+    font-weight: 300;
+    font-style: normal;
+  }
+.navbar {
+    position: fixed;
+    top: 0;
+    width: 100%;
+    color: #333;
+    padding: 15px 0;
+    text-align: center;
+    font-size: 40px;
+}
+.content-wrapper {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    width: 100%;
+}
+.image-container {
+    margin-top: 80px;
+}
+.image-container img {
+    width: 150px;
+    height: 150px;
+    border-radius: 50%;
+}
+.menu {
+    display: flex;
+    justify-content: center;
+    margin-top: 20px;
+}
+.menu div {
+    padding: 10px 20px;
+    cursor: pointer;
+}
+.menu div:hover {
+    color: #8f8f8f;
+}
+.content {
+    margin-top: 20px;
+    padding: 20px;
+    width: 40%;
+    text-align: justify;
+}
+.footer {
+    width: 100%;
+    color: #333;
+    padding: 3%;
+    text-align: center;
+}
