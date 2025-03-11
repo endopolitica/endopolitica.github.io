@@ -5,6 +5,7 @@ function showContent(section) {
         section3: `O EndoBot é um projeto do Endopolítica, uma organização que visa promover o empoderamento de mulheres que possuem ou desconfiam possuir Endometriose, uma doença que atinge aproximadamente 15% da população global. Siga-nos em <a href="https://www.instagram.com/endopolitica" target="_blank">@endopolitica</a>`,
         section4: `Email de contato: <a href="mailto:hannah@endopolitica.org">hannah@endopolitica.org</a> <br>
         Telefone de contato: <a href="tel:+15557307319">+1 555 730 7319</a> <br>
-        Instagram: <a href="https://www.instagram.com/endopolitica" target="_blank">@endopolitica</a>`    };
+        Instagram: <a href="https://www.instagram.com/endopolitica" target="_blank">@endopolitica</a>`
+    };
     document.getElementById("content").innerHTML = content[section];
 }
