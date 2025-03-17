@@ -1,101 +1,326 @@
-import Image from "next/image";
+"use client"
+
+import React from "react"
+import {
+  AppBar,
+  Toolbar,
+  Typography,
+  Container,
+  Grid,
+  Card,
+  CardContent,
+  Box,
+  Button,
+  Menu,
+  MenuItem,
+  styled,
+} from "@mui/material"
+import { KeyboardArrowDown as KeyboardArrowDownIcon, Phone as PhoneIcon } from "@mui/icons-material"
+import Image from "next/image"
+import { Logo } from "./components/Logo"
+
+// Custom styled components
+const StyledAppBar = styled(AppBar)({
+  backgroundColor: "white",
+  boxShadow: "none",
+  color: "black",
+  padding: "12px 0", // Add vertical padding to the entire AppBar
+})
+
+const NavLink = styled(Button)({
+  color: "black",
+  textTransform: "none",
+  fontWeight: "normal",
+  padding: "8px 16px",
+  minWidth: "auto",
+  "&:hover": {
+    backgroundColor: "transparent",
+    color: "gray",
+  },
+})
+
+const HeroCard = styled(Card)({
+  borderRadius: "12px",
+  height: "400px",
+  display: "flex",
+  flexDirection: "column",
+  justifyContent: "center",
+  position: "relative",
+  overflow: "hidden",
+})
+
+const PurpleHeroCard = styled(HeroCard)({
+  backgroundColor: "#d580ff",
+  backgroundImage: 'url("/retangulo1.svg")',
+  backgroundSize: "cover",
+  backgroundBlendMode: "multiply",
+})
+
+const LightPurpleCard = styled(HeroCard)({
+  backgroundColor: "#E8B6FC",
+  display: "flex",
+  alignItems: "center",
+  justifyContent: "center",
+})
+
+const SectionCard = styled(Card)({
+  borderRadius: "12px",
+  padding: "32px",
+  marginBottom: "32px",
+  position: "relative",
+  overflow: "hidden",
+})
+
+const OrangeCard = styled(SectionCard)({
+  backgroundColor: "#FFA000",
+})
+
+const PinkCard = styled(SectionCard)({
+  backgroundColor: "#f284ab",
+})
+
+const PurpleCard = styled(SectionCard)({
+  backgroundColor: "#DD89FF",
+})
+
+const MonoTypography = styled(Typography)({
+  fontFamily: "var(--font-space-mono), monospace",
+});
 
 export default function Home() {
-  return (
-    <div className="grid grid-rows-[20px_1fr_20px] items-center justify-items-center min-h-screen p-8 pb-20 gap-16 sm:p-20 font-[family-name:var(--font-geist-sans)]">
-      <main className="flex flex-col gap-8 row-start-2 items-center sm:items-start">
-        <Image
-          className="dark:invert"
-          src="https://nextjs.org/icons/next.svg"
-          alt="Next.js logo"
-          width={180}
-          height={38}
-          priority
-        />
-        <ol className="list-inside list-decimal text-sm text-center sm:text-left font-[family-name:var(--font-geist-mono)]">
-          <li className="mb-2">
-            Get started by editing{" "}
-            <code className="bg-black/[.05] dark:bg-white/[.06] px-1 py-0.5 rounded font-semibold">
-              app/page.tsx
-            </code>
-            .
-          </li>
-          <li>Save and see your changes instantly.</li>
-        </ol>
+  const [languageMenu, setLanguageMenu] = React.useState<null | HTMLElement>(null)
 
-        <div className="flex gap-4 items-center flex-col sm:flex-row">
-          <a
-            className="rounded-full border border-solid border-transparent transition-colors flex items-center justify-center bg-foreground text-background gap-2 hover:bg-[#383838] dark:hover:bg-[#ccc] text-sm sm:text-base h-10 sm:h-12 px-4 sm:px-5"
-            href="https://vercel.com/new?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            <Image
-              className="dark:invert"
-              src="https://nextjs.org/icons/vercel.svg"
-              alt="Vercel logomark"
-              width={20}
-              height={20}
-            />
-            Deploy now
-          </a>
-          <a
-            className="rounded-full border border-solid border-black/[.08] dark:border-white/[.145] transition-colors flex items-center justify-center hover:bg-[#f2f2f2] dark:hover:bg-[#1a1a1a] hover:border-transparent text-sm sm:text-base h-10 sm:h-12 px-4 sm:px-5 sm:min-w-44"
-            href="https://nextjs.org/docs?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            Read our docs
-          </a>
-        </div>
-      </main>
-      <footer className="row-start-3 flex gap-6 flex-wrap items-center justify-center">
-        <a
-          className="flex items-center gap-2 hover:underline hover:underline-offset-4"
-          href="https://nextjs.org/learn?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          <Image
-            aria-hidden
-            src="https://nextjs.org/icons/file.svg"
-            alt="File icon"
-            width={16}
-            height={16}
-          />
-          Learn
-        </a>
-        <a
-          className="flex items-center gap-2 hover:underline hover:underline-offset-4"
-          href="https://vercel.com/templates?framework=next.js&utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          <Image
-            aria-hidden
-            src="https://nextjs.org/icons/window.svg"
-            alt="Window icon"
-            width={16}
-            height={16}
-          />
-          Examples
-        </a>
-        <a
-          className="flex items-center gap-2 hover:underline hover:underline-offset-4"
-          href="https://nextjs.org?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          <Image
-            aria-hidden
-            src="https://nextjs.org/icons/globe.svg"
-            alt="Globe icon"
-            width={16}
-            height={16}
-          />
-          Go to nextjs.org →
-        </a>
-      </footer>
-    </div>
-  );
+  const handleOpenLanguageMenu = (event: React.MouseEvent<HTMLElement>) => {
+    setLanguageMenu(event.currentTarget)
+  }
+
+  const handleCloseLanguageMenu = () => {
+    setLanguageMenu(null)
+  }
+
+  return (
+    <Box sx={{ bgcolor: "background.default" }}>
+      {/* Navigation */}
+      <StyledAppBar position="static">
+        <Container maxWidth="xl">
+          <Toolbar disableGutters sx={{ display: "flex", justifyContent: "space-between" }}>
+            {/* Left menu items */}
+            <Box sx={{ display: "flex", flex: 1, justifyContent: "flex-start" }}>
+              <NavLink href="#">Home</NavLink>
+              <NavLink href="#manifesto">Manifesto</NavLink>
+              <NavLink href="#o-que-fazemos">O que fazemos</NavLink>
+            </Box>
+
+            {/* Center logo */}
+            <Box
+              sx={{
+                display: "flex",
+                justifyContent: "center",
+                alignItems: "center",
+                height: "40px",
+                marginTop: "8px", // Add some top margin to the logo container
+                marginBottom: "8px", // Add some bottom margin to the logo container
+              }}
+            >
+              <Logo />
+            </Box>
+
+            {/* Right menu items */}
+            <Box sx={{ display: "flex", flex: 1, justifyContent: "flex-end", alignItems: "center" }}>
+              <NavLink href="#proposito">Propósito</NavLink>
+              <NavLink href="#apoio">Apoio</NavLink>
+              <NavLink href="#contato">Contato</NavLink>
+
+              <Box sx={{ ml: 2 }}>
+                <Button
+                  onClick={handleOpenLanguageMenu}
+                  endIcon={<KeyboardArrowDownIcon />}
+                  sx={{ color: "black", textTransform: "none" }}
+                >
+                  PT
+                </Button>
+                <Menu anchorEl={languageMenu} open={Boolean(languageMenu)} onClose={handleCloseLanguageMenu}>
+                  <MenuItem onClick={handleCloseLanguageMenu}>PT</MenuItem>
+                  <MenuItem onClick={handleCloseLanguageMenu}>EN</MenuItem>
+                </Menu>
+              </Box>
+            </Box>
+          </Toolbar>
+        </Container>
+      </StyledAppBar>
+
+      <Container maxWidth="xl" sx={{ mt: 4 }}>
+        {/* Hero Section */}
+        <Grid container spacing={2}>
+          <Grid item xs={12} md={6}>
+            <PurpleHeroCard>
+              <CardContent sx={{ zIndex: 1, p: 4 }}>
+                {/* Replace MonoTypography with regular Typography with fontFamily style */}
+                <MonoTypography variant="h4"  sx={{ fontWeight: 400, mb: 1 }}>
+                  A nossa
+                </MonoTypography>
+                <MonoTypography variant="h2" sx={{ fontWeight: 700, mb: 1 }}>
+                  Endometriose
+                </MonoTypography>
+                <MonoTypography variant="h4"  sx={{ fontWeight: 400, mb: 1 }}>
+                  é política!
+                </MonoTypography>
+              </CardContent>
+            </PurpleHeroCard>
+          </Grid>
+          <Grid item xs={12} md={6}>
+            <LightPurpleCard>
+              <Image
+                src="/hand-holding-uterus.png"
+                alt="Hand holding uterus illustration"
+                width={300}
+                height={300}
+              />
+            </LightPurpleCard>
+          </Grid>
+        </Grid>
+
+        {/* Manifesto Section */}
+        <Box id="manifesto" sx={{ my: 4 }}>
+          <OrangeCard>
+            <Grid container spacing={4}>
+              <Grid item xs={12} md={6}>
+                {/* Replace MonoTypography with regular Typography with fontFamily style */}
+                <Typography
+                  variant="h3"
+                  component="h2"
+                  sx={{ fontWeight: "bold", mb: 3, fontFamily: '"Space Mono", monospace' }}
+                >
+                  Manifesto
+                </Typography>
+                <Typography variant="body2" sx={{ mb: 2 }}>
+                  Lorem ipsum dolor sit amet, consectetuer adipiscing elit, sed diam nonummy nibh euismod tincidunt ut
+                  laoreet dolore magna aliquam erat volutpat. Ut wisi enim ad minim veniam, quis nostrud exerci tation
+                  ullamcorper suscipit lobortis nisl ut aliquip ex ea commodo consequat. Duis autem vel eum iriure dolor
+                  in hendrerit in vulputate velit esse molestie consequat, vel illum dolore eu feugiat nulla facilisis
+                  at vero eros et accumsan et iusto odio dignissim qui blandit praesent luptatum zzril delenit augue
+                  duis dolore te feugait nulla facilisi.
+                </Typography>
+              </Grid>
+              <Grid item xs={12} md={6} 
+                    sx={{
+                      display: "flex",
+                      justifyContent: "center",
+                      alignItems: "center",
+                      position: "relative",
+                      backgroundImage: 'url("/diagonal_orange_background.svg")', // ✅ Add background image
+                      backgroundSize: "cover", // ✅ Ensure it covers the area
+                      backgroundPosition: "center", // ✅ Center the background
+                      backgroundRepeat: "repeat", // ✅ Prevent repetition
+                      minHeight: 400, // ✅ Adjust height to ensure visibility
+                    }}>
+                {/* <Image
+                  src="/hand-gesture.svg"
+                  alt="Hand gesture on orange background"
+                  width={400}
+                  height={900}
+                /> */}
+              </Grid>
+            </Grid>
+          </OrangeCard>
+        </Box>
+
+        {/* O que fazemos Section */}
+        <Box id="o-que-fazemos" sx={{ my: 4 }}>
+          <PinkCard>
+            <Grid container spacing={4}>
+              <Grid item xs={12} md={6} sx={{ display: "flex", justifyContent: "center", alignItems: "center" }}>
+                <Image
+                  src="/placeholder.svg?height=300&width=300"
+                  alt="Hand with stethoscope and uterus"
+                  width={300}
+                  height={300}
+                />
+              </Grid>
+              <Grid item xs={12} md={6}>
+                {/* Replace MonoTypography with regular Typography with fontFamily style */}
+                <Typography
+                  variant="h3"
+                  component="h2"
+                  sx={{ fontWeight: "bold", mb: 3, fontFamily: '"Space Mono", monospace' }}
+                >
+                  O que fazemos
+                </Typography>
+                <Typography variant="body2" sx={{ mb: 2 }}>
+                  Lorem ipsum dolor sit amet, consectetuer adipiscing elit, sed diam nonummy nibh euismod tincidunt ut
+                  laoreet dolore magna aliquam erat volutpat. Ut wisi enim ad minim veniam, quis nostrud exerci tation
+                  ullamcorper suscipit lobortis nisl ut aliquip ex ea commodo consequat. Duis autem vel eum iriure dolor
+                  in hendrerit in vulputate velit esse molestie consequat, vel illum dolore eu feugiat nulla facilisis
+                  at vero eros et accumsan et iusto odio dignissim qui blandit praesent luptatum zzril delenit augue
+                  duis dolore te feugait nulla facilisi.
+                </Typography>
+              </Grid>
+            </Grid>
+          </PinkCard>
+        </Box>
+
+        {/* Propósito Section */}
+        <Box id="proposito" sx={{ my: 4 }}>
+          <PurpleCard>
+            <Grid container spacing={4}>
+              <Grid item xs={12} md={6}>
+                {/* Replace MonoTypography with regular Typography with fontFamily style */}
+                <Typography
+                  variant="h3"
+                  component="h2"
+                  sx={{ fontWeight: "bold", mb: 3, fontFamily: '"Space Mono", monospace' }}
+                >
+                  Propósito
+                </Typography>
+                <Typography variant="body2" sx={{ mb: 2 }}>
+                  Lorem ipsum dolor sit amet, consectetuer adipiscing elit, sed diam nonummy nibh euismod tincidunt ut
+                  laoreet dolore magna aliquam erat volutpat. Ut wisi enim ad minim veniam, quis nostrud exerci tation
+                  ullamcorper suscipit lobortis nisl ut aliquip ex ea commodo consequat. Duis autem vel eum iriure dolor
+                  in hendrerit in vulputate velit esse molestie consequat, vel illum dolore eu feugiat nulla facilisis
+                  at vero eros et accumsan et iusto odio dignissim qui blandit praesent luptatum zzril delenit augue
+                  duis dolore te feugait nulla facilisi.
+                </Typography>
+              </Grid>
+              <Grid item xs={12} md={6} sx={{ display: "flex", justifyContent: "center", alignItems: "center" }}>
+                <Image
+                  src="/placeholder.svg?height=300&width=300"
+                  alt="Hands holding flower shapes"
+                  width={300}
+                  height={300}
+                />
+              </Grid>
+            </Grid>
+          </PurpleCard>
+        </Box>
+
+        {/* Contato Section */}
+        <Box id="contato" sx={{ my: 4 }}>
+          <OrangeCard>
+            <Grid container spacing={4}>
+              <Grid item xs={12} md={6}>
+                {/* Replace MonoTypography with regular Typography with fontFamily style */}
+                <Typography
+                  variant="h3"
+                  component="h2"
+                  sx={{ fontWeight: "bold", mb: 3, fontFamily: '"Space Mono", monospace' }}
+                >
+                  Contato
+                </Typography>
+                <Typography variant="h6" sx={{ mb: 2 }}>
+                  Fale com a gente pelo e-mail:{" "}
+                  <Box component="span" sx={{ fontWeight: "bold" }}>
+                    contato@endopolitica.org
+                  </Box>
+                </Typography>
+              </Grid>
+              <Grid item xs={12} md={6} sx={{ display: "flex", justifyContent: "center", alignItems: "center" }}>
+                <PhoneIcon sx={{ fontSize: 120, color: "#ff0000" }} />
+              </Grid>
+            </Grid>
+          </OrangeCard>
+        </Box>
+      </Container>
+    </Box>
+  )
 }
+
