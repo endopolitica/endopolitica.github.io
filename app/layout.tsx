@@ -19,6 +19,24 @@ const spaceGrotesk = Space_Grotesk({
 export const metadata: Metadata = {
   title: "Endo Política",
   description: "Endometriose é política!",
+  icons: {
+    icon: [
+      { url: "/favicon/favicon.ico" },
+      { url: "/favicon/favicon-16x16.png", sizes: "16x16", type: "image/png" },
+      { url: "/favicon/favicon-32x32.png", sizes: "32x32", type: "image/png" },
+    ],
+    apple: [
+      { url: "/favicon/apple-touch-icon.png", sizes: "180x180", type: "image/png" },
+    ],
+    other: [
+      {
+        rel: "mask-icon",
+        url: "/favicon/safari-pinned-tab.svg",
+        color: "#d580ff",
+      },
+    ],
+  },
+  manifest: "/favicon/site.webmanifest",
 }
 
 export default function RootLayout({
@@ -28,6 +46,10 @@ export default function RootLayout({
 }) {
   return (
     <html lang="pt-BR">
+      <head>
+        <meta name="msapplication-TileColor" content="#d580ff" />
+        <meta name="theme-color" content="#ffffff" />
+      </head>
       <body className={`${inter.variable} ${spaceMono.variable} ${spaceGrotesk.variable}`}>
         <ThemeRegistry>{children}</ThemeRegistry>
       </body>
