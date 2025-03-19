@@ -31,6 +31,8 @@ import {
 } from "@mui/icons-material"
 import Image from "next/image"
 import { Logo } from "./components/Logo"
+import { OrangeBackground } from "./components/OrangeBackground"
+import { PinkBackground } from "./components/PinkBackground"
 
 // Custom styled components
 const StyledAppBar = styled(AppBar)({
@@ -70,7 +72,7 @@ const PurpleHeroCard = styled(HeroCard)({
 })
 
 const LightPurpleCard = styled(HeroCard)({
-  backgroundColor: "#E8B6FC",
+  background: 'radial-gradient(circle, #e9b5ff 0%, #de90ff 100%)',
   display: "flex",
   alignItems: "center",
   justifyContent: "center",
@@ -271,15 +273,43 @@ export default function Home() {
         <Grid container spacing={2}>
           <Grid item xs={12} md={6}>
             <PurpleHeroCard>
-              <CardContent sx={{ zIndex: 1, p: 4 }}>
-                {/* Replace MonoTypography with regular Typography with fontFamily style */}
-                <MonoTypography variant="h4"  sx={{ fontWeight: 400, mb: 1 }}>
+              <CardContent sx={{ 
+                zIndex: 1, 
+                p: 4, 
+                display: "flex", 
+                flexDirection: "column", 
+                height: "100%", 
+                justifyContent: "center" 
+              }}>
+                <MonoTypography 
+                  variant="h4" 
+                  sx={{ 
+                    fontWeight: 400, 
+                    mb: 1,
+                    fontSize: { xs: "1.5rem", sm: "1.8rem", md: "2rem" } 
+                  }}
+                >
                   A nossa
                 </MonoTypography>
-                <MonoTypography variant="h2" sx={{ fontWeight: 700, mb: 1 }}>
+                <MonoTypography 
+                  variant="h2" 
+                  sx={{ 
+                    fontWeight: 700, 
+                    mb: 1,
+                    fontSize: { xs: "2.5rem", sm: "3rem", md: "3.5rem" },
+                    lineHeight: 1.2
+                  }}
+                >
                   Endometriose
                 </MonoTypography>
-                <MonoTypography variant="h4"  sx={{ fontWeight: 400, mb: 1 }}>
+                <MonoTypography 
+                  variant="h4" 
+                  sx={{ 
+                    fontWeight: 400, 
+                    mb: 1,
+                    fontSize: { xs: "1.5rem", sm: "1.8rem", md: "2rem" } 
+                  }}
+                >
                   é política!
                 </MonoTypography>
               </CardContent>
@@ -302,7 +332,6 @@ export default function Home() {
           <OrangeCard>
             <Grid container spacing={4}>
               <Grid item xs={12} md={6}>
-                {/* Replace MonoTypography with regular Typography with fontFamily style */}
                 <Typography
                   variant="h3"
                   component="h2"
@@ -321,22 +350,19 @@ export default function Home() {
               </Grid>
               <Grid item xs={12} md={6} 
                     sx={{
-                      display: "flex",
-                      justifyContent: "center",
-                      alignItems: "center",
                       position: "relative",
-                      backgroundImage: 'url("/diagonal_orange_background.svg")', // ✅ Add background image
-                      backgroundSize: "cover", // ✅ Ensure it covers the area
-                      backgroundPosition: "center", // ✅ Center the background
-                      backgroundRepeat: "repeat", // ✅ Prevent repetition
-                      minHeight: 400, // ✅ Adjust height to ensure visibility
+                      minHeight: 400,
+                      padding: "0 !important", // Override Grid padding with !important
                     }}>
-                {/* <Image
-                  src="/hand-gesture.svg"
-                  alt="Hand gesture on orange background"
-                  width={400}
-                  height={900}
-                /> */}
+                <Box sx={{
+                  position: "absolute",
+                  top: 0,
+                  left: 0,
+                  right: 0,
+                  bottom: 0,
+                }}>
+                  <OrangeBackground />
+                </Box>
               </Grid>
             </Grid>
           </OrangeCard>
@@ -344,18 +370,40 @@ export default function Home() {
 
         {/* O que fazemos Section */}
         <Box id="o-que-fazemos" sx={{ my: 4 }}>
-          <PinkCard>
+          <PinkCard sx={{paddingBottom: "0px"}}>
             <Grid container spacing={4}>
-              <Grid item xs={12} md={6} sx={{ display: "flex", justifyContent: "center", alignItems: "center" }}>
-                <Image
-                  src="/placeholder.svg?height=300&width=300"
-                  alt="Hand with stethoscope and uterus"
-                  width={300}
-                  height={300}
-                />
+              <Grid 
+                item 
+                xs={12} 
+                md={6} 
+                sx={{ 
+                  position: "relative",
+                  minHeight: 400,
+                  padding: "0 !important", // Remove default padding
+                }}
+              >
+                <Box sx={{
+                  position: "absolute",
+                  top: 0,
+                  left: 0,
+                  right: 0,
+                  bottom: 0,
+                }}>
+                  <PinkBackground />
+                </Box>
+                <Box sx={{
+                  position: "absolute",
+                  bottom: 0,
+                  left: 0,
+                  right: 0,
+                  height: "80%", 
+                  backgroundImage: 'url("/estetoscopio.png")',
+                  backgroundSize: "contain",
+                  backgroundPosition: "bottom center",
+                  backgroundRepeat: "no-repeat",
+                }} />
               </Grid>
               <Grid item xs={12} md={6}>
-                {/* Replace MonoTypography with regular Typography with fontFamily style */}
                 <Typography
                   variant="h3"
                   component="h2"
