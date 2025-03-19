@@ -7,7 +7,7 @@ interface LogoProps {
 }
 
 export const Logo: React.FC<LogoProps> = ({ 
-  width = 75, 
+  width = 40, 
   height = 44,
   className = ''
 }) => {

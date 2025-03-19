@@ -14,8 +14,21 @@ import {
   Menu,
   MenuItem,
   styled,
+  IconButton,
+  Drawer,
+  List,
+  ListItem,
+  ListItemButton,
+  ListItemText,
+  useMediaQuery,
+  useTheme,
 } from "@mui/material"
-import { KeyboardArrowDown as KeyboardArrowDownIcon, Phone as PhoneIcon } from "@mui/icons-material"
+import { 
+  KeyboardArrowDown as KeyboardArrowDownIcon, 
+  Phone as PhoneIcon,
+  Menu as MenuIcon,
+  Close as CloseIcon,
+} from "@mui/icons-material"
 import Image from "next/image"
 import { Logo } from "./components/Logo"
 
@@ -89,6 +102,9 @@ const MonoTypography = styled(Typography)({
 
 export default function Home() {
   const [languageMenu, setLanguageMenu] = React.useState<null | HTMLElement>(null)
+  const [mobileMenuOpen, setMobileMenuOpen] = React.useState(false)
+  const theme = useTheme()
+  const isMobile = useMediaQuery(theme.breakpoints.down('md'))
 
   const handleOpenLanguageMenu = (event: React.MouseEvent<HTMLElement>) => {
     setLanguageMenu(event.currentTarget)
@@ -98,53 +114,154 @@ export default function Home() {
     setLanguageMenu(null)
   }
 
+  const toggleMobileMenu = () => {
+    setMobileMenuOpen(!mobileMenuOpen)
+  }
+
+  const navItems = [
+    { label: "Home", href: "#" },
+    { label: "Manifesto", href: "#manifesto" },
+    { label: "O que fazemos", href: "#o-que-fazemos" },
+    { label: "Propósito", href: "#proposito" },
+    { label: "Apoio", href: "#apoio" },
+    { label: "Contato", href: "#contato" },
+  ]
+
   return (
     <Box sx={{ bgcolor: "background.default" }}>
       {/* Navigation */}
       <StyledAppBar position="static">
         <Container maxWidth="xl">
           <Toolbar disableGutters sx={{ display: "flex", justifyContent: "space-between" }}>
-            {/* Left menu items */}
-            <Box sx={{ display: "flex", flex: 1, justifyContent: "flex-start" }}>
-              <NavLink href="#">Home</NavLink>
-              <NavLink href="#manifesto">Manifesto</NavLink>
-              <NavLink href="#o-que-fazemos">O que fazemos</NavLink>
-            </Box>
-
-            {/* Center logo */}
-            <Box
-              sx={{
-                display: "flex",
-                justifyContent: "center",
-                alignItems: "center",
-                height: "40px",
-                marginTop: "8px", // Add some top margin to the logo container
-                marginBottom: "8px", // Add some bottom margin to the logo container
-              }}
-            >
-              <Logo />
-            </Box>
-
-            {/* Right menu items */}
-            <Box sx={{ display: "flex", flex: 1, justifyContent: "flex-end", alignItems: "center" }}>
-              <NavLink href="#proposito">Propósito</NavLink>
-              <NavLink href="#apoio">Apoio</NavLink>
-              <NavLink href="#contato">Contato</NavLink>
-
-              <Box sx={{ ml: 2 }}>
-                <Button
-                  onClick={handleOpenLanguageMenu}
-                  endIcon={<KeyboardArrowDownIcon />}
-                  sx={{ color: "black", textTransform: "none" }}
+            {isMobile ? (
+              <>
+                {/* Mobile Layout */}
+                <Box sx={{ display: "flex", alignItems: "center" }}>
+                  <Logo />
+                </Box>
+                <IconButton
+                  edge="end"
+                  color="inherit"
+                  aria-label="menu"
+                  onClick={toggleMobileMenu}
                 >
-                  PT
-                </Button>
-                <Menu anchorEl={languageMenu} open={Boolean(languageMenu)} onClose={handleCloseLanguageMenu}>
-                  <MenuItem onClick={handleCloseLanguageMenu}>PT</MenuItem>
-                  <MenuItem onClick={handleCloseLanguageMenu}>EN</MenuItem>
-                </Menu>
-              </Box>
-            </Box>
+                  <MenuIcon />
+                </IconButton>
+                
+                {/* Mobile Menu Drawer */}
+                <Drawer
+                  anchor="right"
+                  open={mobileMenuOpen}
+                  onClose={toggleMobileMenu}
+                  PaperProps={{
+                    sx: { 
+                      width: "100%",
+                      bgcolor: "white",
+                      padding: 2,
+                    }
+                  }}
+                >
+                  <Box sx={{ 
+                    display: "flex", 
+                    justifyContent: "space-between", 
+                    alignItems: "center",
+                    p: 2,
+                    mb: 2
+                  }}>
+                    <Logo />
+                    <IconButton
+                      color="inherit"
+                      aria-label="close menu"
+                      onClick={toggleMobileMenu}
+                    >
+                      <CloseIcon />
+                    </IconButton>
+                  </Box>
+                  <List>
+                    {navItems.map((item) => (
+                      <ListItem key={item.label} disablePadding>
+                        <ListItemButton 
+                          component="a" 
+                          href={item.href}
+                          onClick={toggleMobileMenu}
+                          sx={{ py: 2 }}
+                        >
+                          <ListItemText 
+                            primary={item.label} 
+                            primaryTypographyProps={{ 
+                              fontSize: "1.2rem", 
+                              fontWeight: "medium" 
+                            }} 
+                          />
+                        </ListItemButton>
+                      </ListItem>
+                    ))}
+                    <ListItem disablePadding>
+                      <ListItemButton 
+                        onClick={handleOpenLanguageMenu}
+                        sx={{ py: 2 }}
+                      >
+                        <ListItemText 
+                          primary="PT" 
+                          primaryTypographyProps={{ 
+                            fontSize: "1.2rem", 
+                            fontWeight: "medium" 
+                          }} 
+                        />
+                        <KeyboardArrowDownIcon />
+                      </ListItemButton>
+                    </ListItem>
+                  </List>
+                </Drawer>
+              </>
+            ) : (
+              <>
+                {/* Desktop Layout - Existing Code */}
+                <Box sx={{ display: "flex", flex: 1, justifyContent: "flex-start" }}>
+                  <NavLink href="#">Home</NavLink>
+                  <NavLink href="#manifesto">Manifesto</NavLink>
+                  <NavLink href="#o-que-fazemos">O que fazemos</NavLink>
+                </Box>
+
+                <Box
+                  sx={{
+                    display: "flex",
+                    justifyContent: "center",
+                    alignItems: "center",
+                    height: "40px",
+                    marginTop: "8px",
+                    marginBottom: "8px",
+                  }}
+                >
+                  <Logo />
+                </Box>
+
+                <Box sx={{ display: "flex", flex: 1, justifyContent: "flex-end", alignItems: "center" }}>
+                  <NavLink href="#proposito">Propósito</NavLink>
+                  <NavLink href="#apoio">Apoio</NavLink>
+                  <NavLink href="#contato">Contato</NavLink>
+
+                  <Box sx={{ ml: 2 }}>
+                    <Button
+                      onClick={handleOpenLanguageMenu}
+                      endIcon={<KeyboardArrowDownIcon />}
+                      sx={{ color: "black", textTransform: "none" }}
+                    >
+                      PT
+                    </Button>
+                  </Box>
+                </Box>
+              </>
+            )}
+            
+            <Menu 
+              anchorEl={languageMenu} 
+              open={Boolean(languageMenu)} 
+              onClose={handleCloseLanguageMenu}
+            >
+              <MenuItem onClick={handleCloseLanguageMenu}>PT</MenuItem>
+              <MenuItem onClick={handleCloseLanguageMenu}>EN</MenuItem>
+            </Menu>
           </Toolbar>
         </Container>
       </StyledAppBar>
@@ -171,7 +288,7 @@ export default function Home() {
           <Grid item xs={12} md={6}>
             <LightPurpleCard>
               <Image
-                src="/hand-holding-uterus.png"
+                src="/hand-holding-uterus-cut.png"
                 alt="Hand holding uterus illustration"
                 width={300}
                 height={300}
