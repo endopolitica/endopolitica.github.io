@@ -1,6 +1,7 @@
 import React from 'react';
 import { Box, styled } from '@mui/material';
 import Image from 'next/image';
+import { useLanguage } from "../i18n/LanguageContext";
 
 // Custom styled components
 const FooterContainer = styled(Box)({
@@ -34,10 +35,12 @@ interface FooterProps {
 }
 
 const Footer: React.FC<FooterProps> = ({ className }) => {
+  const { t } = useLanguage();
+  
   return (
     <FooterContainer className={className}>
       <FooterText>
-        Somos apoiados por
+        {t.footer.supportedBy}
       </FooterText>
       <LogoContainer>
         <Image

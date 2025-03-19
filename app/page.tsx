@@ -10,6 +10,7 @@ import Footer from "./components/Footer"
 import { ManifestoBackground } from "./components/ManifestoBackground"
 import { PinkBackground } from "./components/PinkBackground"
 import { PropositoBackground } from "./components/PropositoBackground"
+import { LanguageProvider, useLanguage } from "./i18n/LanguageContext"
 
 // Main container styling
 const PageContainer = styled(Box)({
@@ -20,7 +21,10 @@ const MainContainer = styled(Container)({
   marginTop: "2rem",
 });
 
-export default function Home() {
+// Inner component that can use the language context
+const PageContent = () => {
+  const { t } = useLanguage();
+
   return (
     <PageContainer>
       {/* Navigation */}
@@ -33,13 +37,8 @@ export default function Home() {
         {/* Manifesto Section */}
         <ContentSection 
           id="manifesto"
-          title="Manifesto"
-          content="Lorem ipsum dolor sit amet, consectetuer adipiscing elit, sed diam nonummy nibh euismod tincidunt ut
-          laoreet dolore magna aliquam erat volutpat. Ut wisi enim ad minim veniam, quis nostrud exerci tation
-          ullamcorper suscipit lobortis nisl ut aliquip ex ea commodo consequat. Duis autem vel eum iriure dolor
-          in hendrerit in vulputate velit esse molestie consequat, vel illum dolore eu feugiat nulla facilisis
-          at vero eros et accumsan et iusto odio dignissim qui blandit praesent luptatum zzril delenit augue
-          duis dolore te feugait nulla facilisi."
+          title={t.manifesto.title}
+          content={t.manifesto.content}
           backgroundColor="orange"
           background={<ManifestoBackground />}
           backgroundImage="/manifesto.png"
@@ -54,13 +53,8 @@ export default function Home() {
         {/* O que fazemos Section */}
         <ContentSection 
           id="o-que-fazemos"
-          title="O que fazemos"
-          content="Lorem ipsum dolor sit amet, consectetuer adipiscing elit, sed diam nonummy nibh euismod tincidunt ut
-          laoreet dolore magna aliquam erat volutpat. Ut wisi enim ad minim veniam, quis nostrud exerci tation
-          ullamcorper suscipit lobortis nisl ut aliquip ex ea commodo consequat. Duis autem vel eum iriure dolor
-          in hendrerit in vulputate velit esse molestie consequat, vel illum dolore eu feugiat nulla facilisis
-          at vero eros et accumsan et iusto odio dignissim qui blandit praesent luptatum zzril delenit augue
-          duis dolore te feugait nulla facilisi."
+          title={t.whatWeDo.title}
+          content={t.whatWeDo.content}
           backgroundColor="pink"
           background={<PinkBackground />}
           backgroundImage="/estetoscopio.png"
@@ -75,13 +69,8 @@ export default function Home() {
         {/* Propósito Section */}
         <ContentSection 
           id="proposito"
-          title="Propósito"
-          content="Lorem ipsum dolor sit amet, consectetuer adipiscing elit, sed diam nonummy nibh euismod tincidunt ut
-          laoreet dolore magna aliquam erat volutpat. Ut wisi enim ad minim veniam, quis nostrud exerci tation
-          ullamcorper suscipit lobortis nisl ut aliquip ex ea commodo consequat. Duis autem vel eum iriure dolor
-          in hendrerit in vulputate velit esse molestie consequat, vel illum dolore eu feugiat nulla facilisis
-          at vero eros et accumsan et iusto odio dignissim qui blandit praesent luptatum zzril delenit augue
-          duis dolore te feugait nulla facilisi."
+          title={t.purpose.title}
+          content={t.purpose.content}
           backgroundColor="purple"
           background={<PropositoBackground />}
           backgroundImage="/proposito.png"
@@ -99,6 +88,15 @@ export default function Home() {
       {/* Footer */}
       <Footer />
     </PageContainer>
-  )
+  );
+};
+
+// Main export wraps everything with the language provider
+export default function Home() {
+  return (
+    <LanguageProvider>
+      <PageContent />
+    </LanguageProvider>
+  );
 }
 

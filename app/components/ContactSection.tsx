@@ -1,6 +1,7 @@
 import React from "react";
 import { Box, Grid, styled, Link } from "@mui/material";
 import { SectionHeading, MonoTypography } from "./Typography";
+import { useLanguage } from "../i18n/LanguageContext";
 
 // Styled components
 const SectionCard = styled('div')({
@@ -39,16 +40,18 @@ const ContactImage = styled(Box)({
 });
 
 const ContactSection: React.FC<{ className?: string }> = ({ className }) => {
+  const { t } = useLanguage();
+  
   return (
     <Box id="contato" sx={{ my: 4 }} className={className}>
       <SectionCard>
         <Grid container spacing={4}>
           <Grid item xs={12} md={6}>
-            <SectionHeading variant="h3">Contato</SectionHeading>
+            <SectionHeading variant="h3">{t.contact.title}</SectionHeading>
             <MonoTypography variant="body1" sx={{ mb: 2 }}>
-              Fale com a gente pelo e-mail:{" "}
+              {t.contact.intro}{" "}
               <EmailText href="mailto:contato@endopolitica.org">
-                contato@endopolitica.org
+                {t.contact.email}
               </EmailText>
             </MonoTypography>
           </Grid>

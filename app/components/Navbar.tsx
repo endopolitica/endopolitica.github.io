@@ -24,6 +24,7 @@ import {
 } from "@mui/icons-material";
 import { Logo } from "./Logo";
 import { NavTypography } from "./Typography";
+import { useLanguage } from "../i18n/LanguageContext";
 
 // Styled components
 const StyledAppBar = styled(AppBar)({
@@ -66,16 +67,8 @@ interface NavbarProps {
   className?: string;
 }
 
-const navItems = [
-  { label: "Home", href: "#" },
-  { label: "Manifesto", href: "#manifesto" },
-  { label: "O que fazemos", href: "#o-que-fazemos" },
-  { label: "Propósito", href: "#proposito" },
-  { label: "Apoio", href: "#apoio" },
-  { label: "Contato", href: "#contato" },
-];
-
 const Navbar: React.FC<NavbarProps> = ({ className }) => {
+  const { language, t, changeLanguage } = useLanguage();
   const [languageMenu, setLanguageMenu] = useState<null | HTMLElement>(null);
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
   const theme = useTheme();
@@ -89,9 +82,23 @@ const Navbar: React.FC<NavbarProps> = ({ className }) => {
     setLanguageMenu(null);
   };
 
+  const handleChangeLanguage = (lang: string) => {
+    changeLanguage(lang);
+    handleCloseLanguageMenu();
+  };
+
   const toggleMobileMenu = () => {
     setMobileMenuOpen(!mobileMenuOpen);
   };
+
+  const navItems = [
+    { label: t.nav.home, href: "#" },
+    { label: t.nav.manifesto, href: "#manifesto" },
+    { label: t.nav.whatWeDo, href: "#o-que-fazemos" },
+    { label: t.nav.purpose, href: "#proposito" },
+    { label: t.nav.support, href: "#apoio" },
+    { label: t.nav.contact, href: "#contato" },
+  ];
 
   return (
     <StyledAppBar position="static" className={className}>
@@ -160,7 +167,7 @@ const Navbar: React.FC<NavbarProps> = ({ className }) => {
                       sx={{ py: 2 }}
                     >
                       <ListItemText
-                        primary="PT"
+                        primary={language.toUpperCase()}
                         primaryTypographyProps={{
                           fontSize: "1.2rem",
                           fontWeight: "medium",
@@ -177,13 +184,13 @@ const Navbar: React.FC<NavbarProps> = ({ className }) => {
               {/* Desktop Layout */}
               <Box sx={{ display: "flex", flex: 1, justifyContent: "flex-start" }}>
                 <NavLink href="#">
-                  <NavTypography>Home</NavTypography>
+                  <NavTypography>{t.nav.home}</NavTypography>
                 </NavLink>
                 <NavLink href="#manifesto">
-                  <NavTypography>Manifesto</NavTypography>
+                  <NavTypography>{t.nav.manifesto}</NavTypography>
                 </NavLink>
                 <NavLink href="#o-que-fazemos">
-                  <NavTypography>O que fazemos</NavTypography>
+                  <NavTypography>{t.nav.whatWeDo}</NavTypography>
                 </NavLink>
               </Box>
 
@@ -193,13 +200,13 @@ const Navbar: React.FC<NavbarProps> = ({ className }) => {
 
               <Box sx={{ display: "flex", flex: 1, justifyContent: "flex-end", alignItems: "center" }}>
                 <NavLink href="#proposito">
-                  <NavTypography>Propósito</NavTypography>
+                  <NavTypography>{t.nav.purpose}</NavTypography>
                 </NavLink>
                 <NavLink href="#apoio">
-                  <NavTypography>Apoio</NavTypography>
+                  <NavTypography>{t.nav.support}</NavTypography>
                 </NavLink>
                 <NavLink href="#contato">
-                  <NavTypography>Contato</NavTypography>
+                  <NavTypography>{t.nav.contact}</NavTypography>
                 </NavLink>
 
                 <Box sx={{ ml: 2 }}>
@@ -208,7 +215,7 @@ const Navbar: React.FC<NavbarProps> = ({ className }) => {
                     endIcon={<KeyboardArrowDownIcon />}
                     sx={{ color: "black", textTransform: "none" }}
                   >
-                    <NavTypography>PT</NavTypography>
+                    <NavTypography>{language.toUpperCase()}</NavTypography>
                   </Button>
                 </Box>
               </Box>
@@ -220,8 +227,8 @@ const Navbar: React.FC<NavbarProps> = ({ className }) => {
             open={Boolean(languageMenu)}
             onClose={handleCloseLanguageMenu}
           >
-            <MenuItem onClick={handleCloseLanguageMenu}>PT</MenuItem>
-            <MenuItem onClick={handleCloseLanguageMenu}>EN</MenuItem>
+            <MenuItem onClick={() => handleChangeLanguage('pt')}>PT</MenuItem>
+            <MenuItem onClick={() => handleChangeLanguage('en')}>EN</MenuItem>
           </Menu>
         </Toolbar>
       </Container>

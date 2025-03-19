@@ -2,6 +2,7 @@ import React from "react";
 import { Grid, CardContent, styled } from "@mui/material";
 import Image from "next/image";
 import { MonoTypography } from "./Typography";
+import { useLanguage } from "../i18n/LanguageContext";
 
 // Styled components
 const HeroCard = styled('div')({
@@ -63,14 +64,16 @@ const HeroSubtitle = styled(MonoTypography)({
 });
 
 const HeroSection: React.FC = () => {
+  const { t } = useLanguage();
+  
   return (
     <Grid container spacing={2}>
       <Grid item xs={12} md={6}>
         <PurpleHeroCard>
           <HeroContent>
-            <HeroSubtitle variant="h4">A nossa</HeroSubtitle>
-            <HeroTitle variant="h2">Endometriose</HeroTitle>
-            <HeroSubtitle variant="h4">é política!</HeroSubtitle>
+            <HeroSubtitle variant="h4">{t.hero.intro}</HeroSubtitle>
+            <HeroTitle variant="h2">{t.hero.main}</HeroTitle>
+            <HeroSubtitle variant="h4">{t.hero.outro}</HeroSubtitle>
           </HeroContent>
         </PurpleHeroCard>
       </Grid>
