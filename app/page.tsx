@@ -31,8 +31,10 @@ import {
 } from "@mui/icons-material"
 import Image from "next/image"
 import { Logo } from "./components/Logo"
-import { OrangeBackground } from "./components/OrangeBackground"
+import { ManifestoBackground } from "./components/ManifestoBackground"
 import { PinkBackground } from "./components/PinkBackground"
+import { PropositoBackground } from "./components/PropositoBackground"
+import Footer from "./components/Footer"
 
 // Custom styled components
 const StyledAppBar = styled(AppBar)({
@@ -98,7 +100,22 @@ const PurpleCard = styled(SectionCard)({
   backgroundColor: "#DD89FF",
 })
 
+// Updated styled components for typography
 const MonoTypography = styled(Typography)({
+  fontFamily: "var(--font-space-grotesk), sans-serif",
+  fontWeight: 300,
+});
+
+const NavTypography = styled(Typography)({
+  fontFamily: "var(--font-space-grotesk), sans-serif",
+  fontWeight: 700,
+  fontSize: "1.2rem",
+});
+
+// New Section Heading component
+const SectionHeading = styled(Typography)({
+  fontWeight: "bold", 
+  marginBottom: "1.5rem", 
   fontFamily: "var(--font-space-mono), monospace",
 });
 
@@ -220,9 +237,9 @@ export default function Home() {
               <>
                 {/* Desktop Layout - Existing Code */}
                 <Box sx={{ display: "flex", flex: 1, justifyContent: "flex-start" }}>
-                  <NavLink href="#">Home</NavLink>
-                  <NavLink href="#manifesto">Manifesto</NavLink>
-                  <NavLink href="#o-que-fazemos">O que fazemos</NavLink>
+                  <NavLink href="#"><NavTypography>Home</NavTypography></NavLink>
+                  <NavLink href="#manifesto"><NavTypography>Manifesto</NavTypography></NavLink>
+                  <NavLink href="#o-que-fazemos"><NavTypography>O que fazemos</NavTypography></NavLink>
                 </Box>
 
                 <Box
@@ -239,9 +256,9 @@ export default function Home() {
                 </Box>
 
                 <Box sx={{ display: "flex", flex: 1, justifyContent: "flex-end", alignItems: "center" }}>
-                  <NavLink href="#proposito">Propósito</NavLink>
-                  <NavLink href="#apoio">Apoio</NavLink>
-                  <NavLink href="#contato">Contato</NavLink>
+                  <NavLink href="#proposito"><NavTypography>Propósito</NavTypography></NavLink>
+                  <NavLink href="#apoio"><NavTypography>Apoio</NavTypography></NavLink>
+                  <NavLink href="#contato"><NavTypography>Contato</NavTypography></NavLink>
 
                   <Box sx={{ ml: 2 }}>
                     <Button
@@ -249,7 +266,7 @@ export default function Home() {
                       endIcon={<KeyboardArrowDownIcon />}
                       sx={{ color: "black", textTransform: "none" }}
                     >
-                      PT
+                      <NavTypography>PT</NavTypography>
                     </Button>
                   </Box>
                 </Box>
@@ -329,30 +346,28 @@ export default function Home() {
 
         {/* Manifesto Section */}
         <Box id="manifesto" sx={{ my: 4 }}>
-          <OrangeCard>
+          <OrangeCard sx={{paddingBottom: "0px"}}>
             <Grid container spacing={4}>
               <Grid item xs={12} md={6}>
-                <Typography
+                <SectionHeading
                   variant="h3"
-                  component="h2"
-                  sx={{ fontWeight: "bold", mb: 3, fontFamily: '"Space Mono", monospace' }}
                 >
                   Manifesto
-                </Typography>
-                <Typography variant="body2" sx={{ mb: 2 }}>
+                </SectionHeading>
+                <MonoTypography variant="body1" sx={{ mb: 2 }}>
                   Lorem ipsum dolor sit amet, consectetuer adipiscing elit, sed diam nonummy nibh euismod tincidunt ut
                   laoreet dolore magna aliquam erat volutpat. Ut wisi enim ad minim veniam, quis nostrud exerci tation
                   ullamcorper suscipit lobortis nisl ut aliquip ex ea commodo consequat. Duis autem vel eum iriure dolor
                   in hendrerit in vulputate velit esse molestie consequat, vel illum dolore eu feugiat nulla facilisis
                   at vero eros et accumsan et iusto odio dignissim qui blandit praesent luptatum zzril delenit augue
                   duis dolore te feugait nulla facilisi.
-                </Typography>
+                </MonoTypography>
               </Grid>
               <Grid item xs={12} md={6} 
                     sx={{
                       position: "relative",
                       minHeight: 400,
-                      padding: "0 !important", // Override Grid padding with !important
+                      padding: "0 !important", // Remove default padding
                     }}>
                 <Box sx={{
                   position: "absolute",
@@ -360,8 +375,10 @@ export default function Home() {
                   left: 0,
                   right: 0,
                   bottom: 0,
+                  height: "100%",
+                  width: "100%",
                 }}>
-                  <OrangeBackground />
+                  <ManifestoBackground />
                 </Box>
               </Grid>
             </Grid>
@@ -399,26 +416,24 @@ export default function Home() {
                   height: "80%", 
                   backgroundImage: 'url("/estetoscopio.png")',
                   backgroundSize: "contain",
-                  backgroundPosition: "bottom center",
+                  backgroundPosition: "bottom left",
                   backgroundRepeat: "no-repeat",
                 }} />
               </Grid>
               <Grid item xs={12} md={6}>
-                <Typography
+                <SectionHeading
                   variant="h3"
-                  component="h2"
-                  sx={{ fontWeight: "bold", mb: 3, fontFamily: '"Space Mono", monospace' }}
                 >
                   O que fazemos
-                </Typography>
-                <Typography variant="body2" sx={{ mb: 2 }}>
+                </SectionHeading>
+                <MonoTypography variant="body1" sx={{ mb: 2 }}>
                   Lorem ipsum dolor sit amet, consectetuer adipiscing elit, sed diam nonummy nibh euismod tincidunt ut
                   laoreet dolore magna aliquam erat volutpat. Ut wisi enim ad minim veniam, quis nostrud exerci tation
                   ullamcorper suscipit lobortis nisl ut aliquip ex ea commodo consequat. Duis autem vel eum iriure dolor
                   in hendrerit in vulputate velit esse molestie consequat, vel illum dolore eu feugiat nulla facilisis
                   at vero eros et accumsan et iusto odio dignissim qui blandit praesent luptatum zzril delenit augue
                   duis dolore te feugait nulla facilisi.
-                </Typography>
+                </MonoTypography>
               </Grid>
             </Grid>
           </PinkCard>
@@ -426,33 +441,56 @@ export default function Home() {
 
         {/* Propósito Section */}
         <Box id="proposito" sx={{ my: 4 }}>
-          <PurpleCard>
+          <PurpleCard sx={{paddingBottom: "0px", paddingRight: "0px"}}>
             <Grid container spacing={4}>
               <Grid item xs={12} md={6}>
-                {/* Replace MonoTypography with regular Typography with fontFamily style */}
-                <Typography
+                <SectionHeading
                   variant="h3"
-                  component="h2"
-                  sx={{ fontWeight: "bold", mb: 3, fontFamily: '"Space Mono", monospace' }}
                 >
                   Propósito
-                </Typography>
-                <Typography variant="body2" sx={{ mb: 2 }}>
+                </SectionHeading>
+                <MonoTypography variant="body1" sx={{ mb: 2, mr: 2 }}>
                   Lorem ipsum dolor sit amet, consectetuer adipiscing elit, sed diam nonummy nibh euismod tincidunt ut
                   laoreet dolore magna aliquam erat volutpat. Ut wisi enim ad minim veniam, quis nostrud exerci tation
                   ullamcorper suscipit lobortis nisl ut aliquip ex ea commodo consequat. Duis autem vel eum iriure dolor
                   in hendrerit in vulputate velit esse molestie consequat, vel illum dolore eu feugiat nulla facilisis
                   at vero eros et accumsan et iusto odio dignissim qui blandit praesent luptatum zzril delenit augue
                   duis dolore te feugait nulla facilisi.
-                </Typography>
+                </MonoTypography>
               </Grid>
-              <Grid item xs={12} md={6} sx={{ display: "flex", justifyContent: "center", alignItems: "center" }}>
-                <Image
-                  src="/placeholder.svg?height=300&width=300"
-                  alt="Hands holding flower shapes"
-                  width={300}
-                  height={300}
-                />
+              <Grid 
+                item 
+                xs={12} 
+                md={6} 
+                sx={{ 
+                  position: "relative",
+                  minHeight: 400,
+                  padding: "0 !important", // Remove default padding
+                }}
+              >
+                <Box sx={{
+                  position: "absolute",
+                  top: 0,
+                  left: 0,
+                  right: 0,
+                  bottom: 0,
+                }}>
+                  <PropositoBackground />
+                </Box>
+                <Box sx={{
+                  position: "absolute",
+                  bottom: 0,
+                  left: 0,
+                  right: 0,
+                  height: "100%", 
+                  backgroundImage: 'url("/proposito.png")',
+                  backgroundSize: "contain",
+                  backgroundPosition: { 
+                    xs: "bottom center",
+                    md: "bottom right"
+                  },
+                  backgroundRepeat: "no-repeat",
+                }} />
               </Grid>
             </Grid>
           </PurpleCard>
@@ -460,31 +498,44 @@ export default function Home() {
 
         {/* Contato Section */}
         <Box id="contato" sx={{ my: 4 }}>
-          <OrangeCard>
+          <OrangeCard sx={{paddingRight: "0px"}}>
             <Grid container spacing={4}>
               <Grid item xs={12} md={6}>
-                {/* Replace MonoTypography with regular Typography with fontFamily style */}
-                <Typography
+                <SectionHeading
                   variant="h3"
-                  component="h2"
-                  sx={{ fontWeight: "bold", mb: 3, fontFamily: '"Space Mono", monospace' }}
                 >
                   Contato
-                </Typography>
-                <Typography variant="h6" sx={{ mb: 2 }}>
+                </SectionHeading>
+                <MonoTypography variant="body1" sx={{ mb: 2 }}>
                   Fale com a gente pelo e-mail:{" "}
                   <Box component="span" sx={{ fontWeight: "bold" }}>
                     contato@endopolitica.org
                   </Box>
-                </Typography>
+                </MonoTypography>
               </Grid>
-              <Grid item xs={12} md={6} sx={{ display: "flex", justifyContent: "center", alignItems: "center" }}>
-                <PhoneIcon sx={{ fontSize: 120, color: "#ff0000" }} />
+              <Grid item xs={12} md={6} sx={{ position: "relative" }}>
+                <Box 
+                  sx={{
+                    position: "absolute",
+                    bottom: 0,
+                    left: 0,
+                    right: 0,
+                    height: "100%", 
+                    width: "100%",
+                    backgroundImage: 'url("/contato.png")',
+                    backgroundSize: "contain",
+                    backgroundPosition: "bottom right",
+                    backgroundRepeat: "no-repeat",
+                    display: { xs: "none", md: "block" }
+                  }} 
+                />
               </Grid>
             </Grid>
           </OrangeCard>
         </Box>
       </Container>
+      
+      <Footer />
     </Box>
   )
 }
