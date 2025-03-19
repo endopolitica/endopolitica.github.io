@@ -1,36 +1,45 @@
 import React from 'react';
-import { Box, Typography, styled } from '@mui/material';
+import { Box, styled } from '@mui/material';
 import Image from 'next/image';
 
-
-// Custom styled Typography for the footer text
-const FooterText = styled(Typography)({
-  fontFamily: "var(--font-space-mono), monospace",
-  fontWeight: 400,
-  fontSize: "28px",
-  textAlign: "center",
-  marginBottom: "1rem",
+// Custom styled components
+const FooterContainer = styled(Box)({
+  display: "flex",
+  flexDirection: "row",
+  alignItems: "center",
+  justifyContent: "center",
+  padding: "3rem 0",
 });
 
-const Footer: React.FC = () => {
+const FooterText = styled('div')({
+  fontFamily: "var(--font-space-mono), monospace",
+  fontWeight: 400,
+  fontSize: "24px",
+  textAlign: "center",
+  marginRight: "2rem",
+  '@media (max-width: 600px)': {
+    fontSize: "28px",
+    marginRight: "1rem",
+  },
+});
+
+const LogoContainer = styled(Box)({
+  display: "flex", 
+  justifyContent: "center",
+  alignItems: "center",
+});
+
+interface FooterProps {
+  className?: string;
+}
+
+const Footer: React.FC<FooterProps> = ({ className }) => {
   return (
-    <Box 
-      component="footer" 
-      sx={{
-        display: "flex",
-        flexDirection: "row",
-        alignItems: "center",
-        justifyContent: "center",
-      }}
-    >
-      <FooterText sx={{padding: "1rem 2rem 1rem 0"}}>
+    <FooterContainer className={className}>
+      <FooterText>
         Somos apoiados por
       </FooterText>
-      <Box sx={{ 
-        display: "flex", 
-        justifyContent: "center",
-        mb: 2
-      }}>
+      <LogoContainer>
         <Image
           src="/fap.png"
           alt="FAP logo"
@@ -38,8 +47,8 @@ const Footer: React.FC = () => {
           height={50}
           style={{ objectFit: "contain" }}
         />
-      </Box>
-    </Box>
+      </LogoContainer>
+    </FooterContainer>
   );
 };
 
