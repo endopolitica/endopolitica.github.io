@@ -11,28 +11,28 @@ const SectionCard = styled('div')({
   overflow: "hidden",
 });
 
-const OrangeCard = styled(SectionCard)({
+const OrangeCard = styled(SectionCard)(({ theme }) => ({
   backgroundColor: "#FFA000",
-});
+}));
 
-const PinkCard = styled(SectionCard)({
+const PinkCard = styled(SectionCard)(({ theme }) => ({
   backgroundColor: "#f284ab",
-});
+}));
 
-const PurpleCard = styled(SectionCard)({
+const PurpleCard = styled(SectionCard)(({ theme }) => ({
   backgroundColor: "#DD89FF",
   paddingRight: "0px",
-});
+}));
 
-const TextContainer = styled(Grid)({
+const TextContainer = styled(Grid)(({ theme }) => ({
   paddingRight: "1rem",
-});
+}));
 
-const ImageContainer = styled(Grid)({
+const ImageContainer = styled(Grid)(({ theme }) => ({
   position: "relative",
   minHeight: 400,
   padding: "0 !important",
-});
+}));
 
 const BackgroundWrapper = styled(Box)({
   position: "absolute",
@@ -44,14 +44,20 @@ const BackgroundWrapper = styled(Box)({
   width: "100%",
 });
 
-const BackgroundImage = styled(Box)({
+const BackgroundImage = styled(Box)(({ theme }) => ({
   position: "absolute",
   bottom: 0,
   left: 0,
   right: 0,
   backgroundSize: "contain",
   backgroundRepeat: "no-repeat",
-});
+  
+  // Add default responsive heights
+  height: "100%",
+  [theme.breakpoints.down('md')]: {
+    height: "80%", // Default height for mobile devices
+  },
+}));
 
 interface ContentSectionProps {
   id: string;

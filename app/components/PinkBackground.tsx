@@ -1,4 +1,5 @@
 import React from 'react';
+import { Box, useMediaQuery, useTheme } from '@mui/material';
 
 interface PinkBackgroundProps {
   className?: string;
@@ -7,6 +8,42 @@ interface PinkBackgroundProps {
 export const PinkBackground: React.FC<PinkBackgroundProps> = ({ 
   className = ''
 }) => {
+  const theme = useTheme();
+  const isMobile = useMediaQuery(theme.breakpoints.down('md'));
+  
+  if (isMobile) {
+    // CSS-based approach for mobile
+    return (
+      <Box
+        className={className}
+        sx={{
+          width: "100%",
+          height: "100%",
+          backgroundColor: "#f284ab",
+          backgroundImage: 'url("/textura-pinkcard.svg")',
+          backgroundRepeat: "repeat",
+          backgroundSize: "cover",
+          flexDirection: "column",
+          justifyContent: "center",
+          padding: "0px",
+          display: "flex",
+          position: "relative",
+          "&::after": {
+            content: '""',
+            position: "absolute",
+            top: 0,
+            left: 0,
+            right: 0,
+            bottom: 0,
+            backgroundColor: "#f284ab",
+            opacity: 0.2,
+          }
+        }}
+      />
+    );
+  }
+  
+  // SVG approach for desktop
   return (
     <svg 
       width="100%" 

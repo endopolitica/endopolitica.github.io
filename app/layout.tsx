@@ -1,10 +1,9 @@
 import type React from "react"
 import "./globals.css"
 import type { Metadata } from "next"
-import { Inter, Space_Mono, Space_Grotesk } from "next/font/google"
+import { Space_Mono, Space_Grotesk } from "next/font/google"
 import ThemeRegistry from "./theme-registry"
 
-const inter = Inter({ subsets: ["latin"], variable: "--font-inter" })
 const spaceMono = Space_Mono({
   weight: ["400", "700"],
   subsets: ["latin"],
@@ -50,7 +49,7 @@ export default function RootLayout({
         <meta name="msapplication-TileColor" content="#d580ff" />
         <meta name="theme-color" content="#ffffff" />
       </head>
-      <body className={`${inter.variable} ${spaceMono.variable} ${spaceGrotesk.variable}`}>
+      <body className={`${spaceMono.variable} ${spaceGrotesk.variable}`}>
         <ThemeRegistry>{children}</ThemeRegistry>
       </body>
     </html>

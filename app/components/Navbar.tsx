@@ -25,6 +25,7 @@ import {
 import { Logo } from "./Logo";
 import { NavTypography } from "./Typography";
 import { useLanguage } from "../i18n/LanguageContext";
+import { scrollToSection } from "../utils/scrollToSection";
 
 // Styled components
 const StyledAppBar = styled(AppBar)({
@@ -91,6 +92,19 @@ const Navbar: React.FC<NavbarProps> = ({ className }) => {
     setMobileMenuOpen(!mobileMenuOpen);
   };
 
+  const handleNavClick = (href: string) => (event: React.MouseEvent) => {
+    event.preventDefault();
+    if (href.startsWith('#')) {
+      const id = href.substring(1);
+      scrollToSection(id);
+      if (mobileMenuOpen) {
+        toggleMobileMenu();
+      }
+    } else {
+      window.location.href = href;
+    }
+  };
+
   const navItems = [
     { label: t.nav.home, href: "#" },
     { label: t.nav.manifesto, href: "#manifesto" },
@@ -148,7 +162,7 @@ const Navbar: React.FC<NavbarProps> = ({ className }) => {
                       <ListItemButton
                         component="a"
                         href={item.href}
-                        onClick={toggleMobileMenu}
+                        onClick={handleNavClick(item.href)}
                         sx={{ py: 2 }}
                       >
                         <ListItemText
@@ -183,13 +197,13 @@ const Navbar: React.FC<NavbarProps> = ({ className }) => {
             <>
               {/* Desktop Layout */}
               <Box sx={{ display: "flex", flex: 1, justifyContent: "flex-start" }}>
-                <NavLink href="#">
+                <NavLink href="#" onClick={handleNavClick("#")}>
                   <NavTypography>{t.nav.home}</NavTypography>
                 </NavLink>
-                <NavLink href="#manifesto">
+                <NavLink href="#manifesto" onClick={handleNavClick("#manifesto")}>
                   <NavTypography>{t.nav.manifesto}</NavTypography>
                 </NavLink>
-                <NavLink href="#o-que-fazemos">
+                <NavLink href="#o-que-fazemos" onClick={handleNavClick("#o-que-fazemos")}>
                   <NavTypography>{t.nav.whatWeDo}</NavTypography>
                 </NavLink>
               </Box>
@@ -199,13 +213,13 @@ const Navbar: React.FC<NavbarProps> = ({ className }) => {
               </LogoContainer>
 
               <Box sx={{ display: "flex", flex: 1, justifyContent: "flex-end", alignItems: "center" }}>
-                <NavLink href="#proposito">
+                <NavLink href="#proposito" onClick={handleNavClick("#proposito")}>
                   <NavTypography>{t.nav.purpose}</NavTypography>
                 </NavLink>
-                <NavLink href="#apoio">
+                <NavLink href="#apoio" onClick={handleNavClick("#apoio")}>
                   <NavTypography>{t.nav.support}</NavTypography>
                 </NavLink>
-                <NavLink href="#contato">
+                <NavLink href="#contato" onClick={handleNavClick("#contato")}>
                   <NavTypography>{t.nav.contact}</NavTypography>
                 </NavLink>
 

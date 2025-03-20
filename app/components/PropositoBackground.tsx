@@ -1,4 +1,5 @@
 import React from 'react';
+import { Box, useMediaQuery, useTheme } from '@mui/material';
 
 interface PropositoBackgroundProps {
   className?: string;
@@ -7,6 +8,38 @@ interface PropositoBackgroundProps {
 export const PropositoBackground: React.FC<PropositoBackgroundProps> = ({ 
   className = ''
 }) => {
+  const theme = useTheme();
+  const isMobile = useMediaQuery(theme.breakpoints.down('md'));
+  
+  if (isMobile) {
+    // CSS-based approach for mobile
+    return (
+      <Box
+        className={className}
+        sx={{
+          width: "100%",
+          height: "100%",
+          backgroundColor: "#DD89FF",
+          backgroundImage: 'url("/textura-proposito.svg")',
+          backgroundRepeat: "repeat",
+          backgroundSize: "cover",
+          position: "relative",
+          "&::after": {
+            content: '""',
+            position: "absolute",
+            top: 0,
+            left: 0,
+            right: 0,
+            bottom: 0,
+            backgroundColor: "#DD89FF",
+            opacity: 0.2,
+          }
+        }}
+      />
+    );
+  }
+  
+  // SVG approach for desktop
   return (
     <svg 
       width="100%" 

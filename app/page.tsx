@@ -47,7 +47,7 @@ const PageContent = () => {
             xs: "bottom center",
             md: "bottom center"
           }}
-          margin="0 0 0 7rem"
+          margin="0 0 0 2rem"
         />
 
         {/* O que fazemos Section */}
@@ -75,18 +75,17 @@ const PageContent = () => {
           background={<PropositoBackground />}
           backgroundImage="/proposito.png"
           backgroundImageHeight="100%"
-          backgroundPosition={{ 
-            xs: "bottom center",
-            md: "top right"
+          backgroundPosition={{
+            md: "right",
+            lg: "top right"
           }}
         />
 
         {/* Contato Section */}
         <ContactSection />
+        {/* Footer */}
+        <Footer />
       </MainContainer>
-      
-      {/* Footer */}
-      <Footer />
     </PageContainer>
   );
 };

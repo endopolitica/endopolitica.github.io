@@ -23,7 +23,7 @@ const theme = createTheme({
     },
   },
   typography: {
-    fontFamily: "var(--font-inter)",
+    fontFamily: "var(--font-space-grotesk)",
     h1: {
       fontWeight: 700,
     },
