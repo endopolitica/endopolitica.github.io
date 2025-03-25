@@ -11,24 +11,24 @@ const SectionCard = styled('div')({
   overflow: "hidden",
 });
 
-const OrangeCard = styled(SectionCard)(({ theme }) => ({
+const OrangeCard = styled(SectionCard)(() => ({
   backgroundColor: "#FFA000",
 }));
 
-const PinkCard = styled(SectionCard)(({ theme }) => ({
+const PinkCard = styled(SectionCard)(() => ({
   backgroundColor: "#f284ab",
 }));
 
-const PurpleCard = styled(SectionCard)(({ theme }) => ({
+const PurpleCard = styled(SectionCard)(() => ({
   backgroundColor: "#DD89FF",
   paddingRight: "0px",
 }));
 
-const TextContainer = styled(Grid)(({ theme }) => ({
+const TextContainer = styled(Grid)(() => ({
   paddingRight: "1rem",
 }));
 
-const ImageContainer = styled(Grid)(({ theme }) => ({
+const ImageContainer = styled(Grid)(() => ({
   position: "relative",
   minHeight: 400,
   padding: "0 !important",
