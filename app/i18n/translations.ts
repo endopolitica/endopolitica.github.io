@@ -51,7 +51,7 @@ export const translations: Record<string, TranslationContent> = {
     },
     manifesto: {
       title: "Manifesto",
-      content: `Quando temos um problema de saúde e buscamos um profissional, queremos uma pessoa em que possamos confiar. Com pacientes de endometriose isso é mais complexo: existem evidências de que, mundialmente, uma série de mitos desmentidos há décadas continuam guiando a conduta médica. A desinformação é uma questão chave porque afeta não só pacientes, mas também médicos, familiares, empregadores e governantes. Isso impacta não só o tempo gasto até o diagnóstico, mas o acesso a um tratamento adequado. A falta de conhecimento também propicia a realização de cirurgias feitas de forma comprovadamente errada, o que  pode piorar os sintomas e causar complicações mais cruéis que a própia doença para a vida da paciente.`
+      content: `Quando temos um problema de saúde e buscamos um profissional, queremos uma pessoa em que possamos confiar. Com pacientes de endometriose isso é mais complexo: existem evidências de que, mundialmente, uma série de mitos desmentidos há décadas continuam guiando a conduta médica. A desinformação é uma questão chave porque afeta não só pacientes, mas também médicos, familiares, empregadores e governantes. Isso impacta não só o tempo gasto até o diagnóstico, mas o acesso a um tratamento adequado. A falta de conhecimento também propicia a realização de cirurgias feitas de forma comprovadamente errada, o que  pode piorar os sintomas e causar complicações mais cruéis que a própria doença para a vida da paciente.`
     },
     whatWeDo: {
       title: "O que fazemos",
