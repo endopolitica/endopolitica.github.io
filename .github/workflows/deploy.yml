@@ -53,11 +53,12 @@ jobs:
       - name: Add .nojekyll file
         run: touch out/.nojekyll
         
-      - name: Deploy to GitHub Pages
-        uses: JamesIves/github-pages-deploy-action@v4
-        with:
-          repository-name: endopolitica/endopolitica.github.io
-          branch: gh-pages  # The branch the action should deploy to
-          folder: out       # The folder the action should deploy
-          clean: true       # Automatically remove deleted files from the deployment
-          token: ${{ secrets.GITHUB_TOKEN }}  # Uses the default token provided by Actions
+      - name: Deploy directly to GitHub Pages
+        run: |
+          cd out
+          git init
+          git config user.name "GitHub Actions Bot"
+          git config user.email "actions@github.com"
+          git add -A
+          git commit -m "Deploy to GitHub Pages"
+          git push -f https://x-access-token:${{ github.token }}@github.com/endopolitica/endopolitica.github.io.git HEAD:gh-pages</parameter>
