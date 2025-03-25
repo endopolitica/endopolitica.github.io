@@ -61,4 +61,4 @@ jobs:
           git config user.email "actions@github.com"
           git add -A
           git commit -m "Deploy to GitHub Pages"
-          git push -f https://x-access-token:${{ github.token }}@github.com/endopolitica/endopolitica.github.io.git HEAD:gh-pages</parameter>
+          git push -f https://x-access-token:${{ github.token }}@github.com/endopolitica/endopolitica.github.io.git HEAD:gh-pages
