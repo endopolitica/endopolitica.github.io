@@ -21,7 +21,7 @@ jobs:
           cache: 'npm'
           
       - name: Install dependencies
-        run: npm ci
+        run: npm install  # Changed from npm ci to avoid lock file issues
         
       - name: Configure Next.js for GitHub Pages
         run: |
@@ -33,8 +33,10 @@ jobs:
             images: {
               unoptimized: true, // Needed for static export
             },
-            basePath: '/endopolitica.github.io', // Add your repository name here
-            assetPrefix: '/endopolitica.github.io/', // Add your repository name with trailing slash
+            // For organization/user site (username.github.io), you don't need basePath
+            // basePath: '', 
+            // For asset prefix, use the empty string or '/' for username.github.io
+            assetPrefix: '/', 
           };
           
           module.exports = nextConfig;
@@ -51,4 +53,4 @@ jobs:
         with:
           branch: gh-pages  # The branch the action should deploy to
           folder: out       # The folder the action should deploy
-          clean: true       # Automatically remove deleted files from the deployment 
+          clean: true       # Automatically remove deleted files from the deployment
