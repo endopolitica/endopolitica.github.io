@@ -26,6 +26,7 @@ const PurpleCard = styled(SectionCard)(() => ({
 
 const TextContainer = styled(Grid)(() => ({
   paddingRight: "1rem",
+  textAlign: "justify", // Add text justification
 }));
 
 const ImageContainer = styled(Grid)(() => ({
@@ -115,7 +116,7 @@ const ContentSection: React.FC<ContentSectionProps> = ({
   const textContent = (
     <TextContainer item xs={12} md={6}>
       <SectionHeading variant="h3">{title}</SectionHeading>
-      <MonoTypography sx={{ mb: 2, fontSize: "18px" }}>
+      <MonoTypography sx={{ mb: 2, fontSize: "17px" }}>
         {content}
       </MonoTypography>
     </TextContainer>
