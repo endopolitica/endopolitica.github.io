@@ -39,7 +39,11 @@ const ContactImage = styled(Box)({
   backgroundRepeat: "no-repeat",
 });
 
-const ContactSection: React.FC<{ className?: string }> = ({ className }) => {
+interface ContactSectionProps {
+  className?: string;
+}
+
+const ContactSection: React.FC<ContactSectionProps> = ({ className }) => {
   const { t } = useLanguage();
   
   return (
@@ -52,6 +56,12 @@ const ContactSection: React.FC<{ className?: string }> = ({ className }) => {
               {t.contact.intro}{" "}
               <EmailText href="mailto:contato@endopolitica.org">
                 {t.contact.email}
+              </EmailText>
+            </MonoTypography>
+            <MonoTypography variant="body1" sx={{ mb: 2 }}>
+              Instagram:{" "}
+              <EmailText href="https://instagram.com/endopolitica" target="_blank" rel="noopener noreferrer">
+                instagram.com/endopolitica
               </EmailText>
             </MonoTypography>
           </Grid>

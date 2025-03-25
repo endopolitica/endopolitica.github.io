@@ -23,8 +23,6 @@ export const PinkBackground: React.FC<PinkBackgroundProps> = ({
           backgroundImage: 'url("/textura-pinkcard.svg")',
           backgroundRepeat: "repeat",
           backgroundSize: "cover",
-          flexDirection: "column",
-          justifyContent: "center",
           padding: "0px",
           display: "flex",
           position: "relative",

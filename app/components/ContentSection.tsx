@@ -34,7 +34,7 @@ const ImageContainer = styled(Grid)(({ theme }) => ({
   padding: "0 !important",
 }));
 
-const BackgroundWrapper = styled(Box)({
+const BackgroundWrapper = styled(Box)(({ theme }) => ({
   position: "absolute",
   top: 0,
   left: 0,
@@ -42,9 +42,13 @@ const BackgroundWrapper = styled(Box)({
   bottom: 0,
   height: "100%",
   width: "100%",
-});
 
-const BackgroundImage = styled(Box)(({ theme }) => ({
+  [theme.breakpoints.down('md')]: {
+      padding: "0px",
+  },
+}));
+
+const LeadingImage = styled(Box)(({ theme }) => ({
   position: "absolute",
   bottom: 0,
   left: 0,
@@ -64,8 +68,8 @@ interface ContentSectionProps {
   title: string;
   content: string;
   background?: ReactNode;
-  backgroundImage?: string;
-  backgroundImageHeight?: string;
+  leadingImage?: string;
+  leadingImageHeight?: string;
   backgroundPosition?: string | { [key: string]: string };
   backgroundDisplay?: { [key: string]: string };
   margin?: string;
@@ -79,8 +83,8 @@ const ContentSection: React.FC<ContentSectionProps> = ({
   title,
   content,
   background,
-  backgroundImage,
-  backgroundImageHeight,
+  leadingImage,
+  leadingImageHeight,
   backgroundPosition = "bottom right",
   backgroundDisplay,
   backgroundColor,
@@ -105,28 +109,28 @@ const ContentSection: React.FC<ContentSectionProps> = ({
 
   const cardProps = {
     className: className,
-    style: { paddingBottom: backgroundImage ? "0px" : undefined },
+    style: { paddingBottom: leadingImage ? "0px" : undefined },
   };
 
   const textContent = (
     <TextContainer item xs={12} md={6}>
       <SectionHeading variant="h3">{title}</SectionHeading>
-      <MonoTypography variant="body1" sx={{ mb: 2 }}>
+      <MonoTypography sx={{ mb: 2, fontSize: "18px" }}>
         {content}
       </MonoTypography>
     </TextContainer>
   );
 
-  const imageContent = backgroundImage || background ? (
+  const imageContent = leadingImage || background ? (
     <ImageContainer item xs={12} md={6}>
-      <BackgroundWrapper sx={{margin: margin}}>
+      <BackgroundWrapper sx={{ margin: margin }}>
         {background}
       </BackgroundWrapper>
-      {backgroundImage && (
-        <BackgroundImage
+      {leadingImage && (
+        <LeadingImage
           sx={{
-            backgroundImage: `url("${backgroundImage}")`,
-            height: backgroundImageHeight || "100%",
+            backgroundImage: `url("${leadingImage}")`,
+            height: leadingImageHeight || "100%",
             backgroundPosition: backgroundPosition,
             ...(backgroundDisplay && { display: backgroundDisplay }),
           }}

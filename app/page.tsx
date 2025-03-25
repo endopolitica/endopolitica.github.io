@@ -41,8 +41,8 @@ const PageContent = () => {
           content={t.manifesto.content}
           backgroundColor="orange"
           background={<ManifestoBackground />}
-          backgroundImage="/manifesto.png"
-          backgroundImageHeight="90%"
+          leadingImage="/manifesto.png"
+          leadingImageHeight="90%"
           backgroundPosition={{ 
             xs: "bottom center",
             md: "bottom center"
@@ -57,8 +57,8 @@ const PageContent = () => {
           content={t.whatWeDo.content}
           backgroundColor="pink"
           background={<PinkBackground />}
-          backgroundImage="/estetoscopio.png"
-          backgroundImageHeight="90%"
+          leadingImage="/estetoscopio.png"
+          leadingImageHeight="90%"
           backgroundPosition={{ 
             xs: "bottom center",
             md: "bottom left"
@@ -73,8 +73,8 @@ const PageContent = () => {
           content={t.purpose.content}
           backgroundColor="purple"
           background={<PropositoBackground />}
-          backgroundImage="/proposito.png"
-          backgroundImageHeight="100%"
+          leadingImage="/proposito.png"
+          leadingImageHeight="100%"
           backgroundPosition={{
             md: "right",
             lg: "top right"
