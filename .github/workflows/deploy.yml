@@ -1,0 +1,64 @@
+name: Deploy to GitHub Pages
+
+on:
+  push:
+    branches:
+      - new-version  # Only trigger deployment on pushes to new-version branch
+  workflow_dispatch: # Allow manual triggering from the GitHub UI
+
+jobs:
+  build-and-deploy:
+    runs-on: ubuntu-latest
+    # Add permissions explicitly
+    permissions:
+      contents: write
+    
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v3
+        with:
+          persist-credentials: false # Don't persist credentials
+        
+      - name: Setup Node.js
+        uses: actions/setup-node@v3
+        with:
+          node-version: 18  # Use Node.js 18 (or adjust to match your project requirements)
+          cache: 'npm'
+          
+      - name: Install dependencies
+        run: npm install  # Changed from npm ci to avoid lock file issues
+        
+      - name: Configure Next.js for GitHub Pages
+        run: |
+          # Create or update next.config.js with GitHub Pages configuration
+          cat > next.config.js << EOL
+          /** @type {import('next').NextConfig} */
+          const nextConfig = {
+            output: 'export',  // Use static export
+            images: {
+              unoptimized: true, // Needed for static export
+            },
+            // For organization/user site (username.github.io), you don't need basePath
+            // basePath: '', 
+            // For asset prefix, use the empty string or '/' for username.github.io
+            assetPrefix: '/', 
+          };
+          
+          module.exports = nextConfig;
+          EOL
+          
+      - name: Build the Next.js app
+        run: npm run build
+        
+      - name: Add .nojekyll file
+        run: touch out/.nojekyll
+        
+      - name: Deploy directly to GitHub Pages
+        run: |
+          cd out
+          git init
+          git config user.name "GitHub Actions Bot"
+          git config user.email "actions@github.com"
+          git add -A
+          git commit -m "Deploy to GitHub Pages"
+          git push -f https://x-access-token:${{ github.token }}@github.com/endopolitica/endopolitica.github.io.git HEAD:gh-pages
