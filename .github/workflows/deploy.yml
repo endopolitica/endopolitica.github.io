@@ -1,0 +1,54 @@
+name: Deploy to GitHub Pages
+
+on:
+  push:
+    branches:
+      - new-version  # Only trigger deployment on pushes to new-version branch
+  workflow_dispatch: # Allow manual triggering from the GitHub UI
+
+jobs:
+  build-and-deploy:
+    runs-on: ubuntu-latest
+    
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v3
+        
+      - name: Setup Node.js
+        uses: actions/setup-node@v3
+        with:
+          node-version: 18  # Use Node.js 18 (or adjust to match your project requirements)
+          cache: 'npm'
+          
+      - name: Install dependencies
+        run: npm ci
+        
+      - name: Configure Next.js for GitHub Pages
+        run: |
+          # Create or update next.config.js with GitHub Pages configuration
+          cat > next.config.js << EOL
+          /** @type {import('next').NextConfig} */
+          const nextConfig = {
+            output: 'export',  // Use static export
+            images: {
+              unoptimized: true, // Needed for static export
+            },
+            basePath: '/endopolitica.github.io', // Add your repository name here
+            assetPrefix: '/endopolitica.github.io/', // Add your repository name with trailing slash
+          };
+          
+          module.exports = nextConfig;
+          EOL
+          
+      - name: Build the Next.js app
+        run: npm run build
+        
+      - name: Add .nojekyll file
+        run: touch out/.nojekyll
+        
+      - name: Deploy to GitHub Pages
+        uses: JamesIves/github-pages-deploy-action@v4
+        with:
+          branch: gh-pages  # The branch the action should deploy to
+          folder: out       # The folder the action should deploy
+          clean: true       # Automatically remove deleted files from the deployment 
