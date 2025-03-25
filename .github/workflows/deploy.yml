@@ -9,10 +9,15 @@ on:
 jobs:
   build-and-deploy:
     runs-on: ubuntu-latest
+    # Add permissions explicitly
+    permissions:
+      contents: write
     
     steps:
       - name: Checkout code
         uses: actions/checkout@v3
+        with:
+          persist-credentials: false # Don't persist credentials
         
       - name: Setup Node.js
         uses: actions/setup-node@v3
@@ -51,7 +56,8 @@ jobs:
       - name: Deploy to GitHub Pages
         uses: JamesIves/github-pages-deploy-action@v4
         with:
+          repository-name: endopolitica/endopolitica.github.io
           branch: gh-pages  # The branch the action should deploy to
           folder: out       # The folder the action should deploy
           clean: true       # Automatically remove deleted files from the deployment
-          token: ${{ secrets.GH_PAGES_TOKEN }}
+          token: ${{ secrets.GITHUB_TOKEN }}  # Uses the default token provided by Actions
